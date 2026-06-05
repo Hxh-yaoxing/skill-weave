@@ -57,10 +57,7 @@ Four interactive demos: basic routing → active learning → skill weaving → 
 ## 📦 Install
 
 ```bash
-# From GitHub (recommended until PyPI listing is complete)
-pip install git+https://github.com/Hxh-yaoxing/skill-weave.git
-
-# Coming soon: pip install skill-weave
+pip install skill-weave
 ```
 
 ---
