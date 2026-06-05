@@ -189,14 +189,27 @@ skills = load_skill_metadata("/skill/dir")      # scan all skill metadata
 
 ## 📊 Benchmark
 
-23-query benchmark included in the repo (`benchmark/queries.json`).
+23-query benchmark included in the repo (`benchmark/queries.json`). Results verified 2026-06-05:
+
+| Metric | Value |
+|--------|-------|
+| Skills tested | 141 (63 T1 + 56 T2 + 22 T3) |
+| **BM25 + TreeFilter (top-1)** | **16/23 = 69.6%** |
+| BM25 + TreeFilter (top-3) | 17/23 = 73.9% |
+| Pipeline stages | Tree Filter → BM25 → LLM Re-rank |
 
 ```bash
-# Run the benchmark
-python -c "from skill_weave import SkillWeave; sw = SkillWeave(); sw.run_benchmark(verbose=True)"
+# Run the benchmark — verify yourself
+python -c "
+from skill_weave import SkillWeave
+sw = SkillWeave('/path/to/skills')
+sw.run_benchmark(verbose=True)
+"
 ```
 
-The 3-stage pipeline (Tree Filter → BM25 → LLM Re-rank) is designed to push accuracy well beyond keyword-only matching. Run the benchmark yourself to see results with your skill inventory.
+The 3-stage pipeline is designed to push accuracy well beyond keyword-only matching.
+LLM re-rank (not included in this benchmark) provides semantic understanding
+for the 30% of queries where keyword overlap alone isn't enough.
 
 ---
 
