@@ -1,0 +1,94 @@
+[
+  {
+    "query": "帮我搜索最新的AI论文",
+    "expected": "arxiv"
+  },
+  {
+    "query": "查一下附近的餐厅",
+    "expected": "find-nearby"
+  },
+  {
+    "query": "SSH到NAS操作Docker",
+    "expected": "nas-ssh-login"
+  },
+  {
+    "query": "在飞书群里发消息",
+    "expected": "feishu-lark-mcp"
+  },
+  {
+    "query": "用浏览器自动化操作",
+    "expected": "browser-automation"
+  },
+  {
+    "query": "审查外部技能包的安全性",
+    "expected": "skill-vetter"
+  },
+  {
+    "query": "检查代码中的安全漏洞和注入风险",
+    "expected": "github-code-review"
+  },
+  {
+    "query": "生成架构图",
+    "expected": "architecture-diagram"
+  },
+  {
+    "query": "写一份PowerPoint",
+    "expected": "powerpoint"
+  },
+  {
+    "query": "总结YouTube视频内容",
+    "expected": "youtube-content"
+  },
+  {
+    "query": "调试一个Python错误",
+    "expected": "systematic-debugging"
+  },
+  {
+    "query": "管理GitHub PR和代码审查",
+    "expected": "github-pr-workflow"
+  },
+  {
+    "query": "用Axolotl框架微调LLM模型",
+    "expected": "axolotl"
+  },
+  {
+    "query": "用MCP工具调用",
+    "expected": "native-mcp"
+  },
+  {
+    "query": "搜索网页信息",
+    "expected": "ddg-search"
+  },
+  {
+    "query": "管理Linear任务",
+    "expected": "linear"
+  },
+  {
+    "query": "帮我深度研究一个技术课题",
+    "expected": "deep-research-pro"
+  },
+  {
+    "query": "生成ASCII艺术图",
+    "expected": "ascii-art"
+  },
+  {
+    "query": "用Playwright自动化网页测试",
+    "expected": "playwright-web-automation"
+  },
+  {
+    "query": "SSH到腾讯云服务器部署服务",
+    "expected": "ssh-tunneling"
+  },
+  {
+    "query": "在NAS上重启Docker容器",
+    "expected": "nas-ssh-login"
+  },
+  {
+    "query": "查一篇学术论文的详细信息",
+    "expected": "arxiv"
+  },
+  {
+    "query": "用DuckDuckGo搜索今天的新闻头条",
+    "expected": "ddg-search"
+  }
+]
