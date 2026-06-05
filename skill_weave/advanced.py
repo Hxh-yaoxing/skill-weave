@@ -177,8 +177,7 @@ class TreeFilter:
 class SkillWeave:
     """Complete hybrid router: Tree Filter (L1) → BM25 (L2) → LLM Re-rank (L3).
 
-    Production deployment with 138 skills, 95.7% benchmark accuracy,
-    81% context reduction via tree-based pre-filtering.
+    Tree filter reduces 141-skill inventory to ~15 candidates before BM25 scoring.
     """
 
     def __init__(self, skill_dir: str, llm_rank_fn: Optional[Callable] = None):

@@ -80,7 +80,7 @@ for r in results:
 # → monitor:  0.18
 ```
 
-*This is the **base router** — zero dependencies, pure keyword overlap scoring. It correctly picks `deploy` (the task is about deployment), but doesn't catch that "go back" means `rollback`. That's where the full 3-stage pipeline comes in — scroll down to see how it pushes accuracy from ~70% to 95.7%.*
+*This is the **base router** — zero dependencies, pure keyword overlap scoring. It correctly picks `deploy` (the task is about deployment), but doesn't catch that "go back" means `rollback`. That's where the full 3-stage pipeline comes in — BM25 alone pushes accuracy to 69.6% (16/23), and LLM re-rank further improves it.*
 
 ---
 
@@ -110,7 +110,7 @@ flowchart TD
     
     subgraph L3["L3: LLM Re-rank (optional, ~1s)"]
         R1["Semantic understanding over top ~10"]
-        R2["Accuracy: 69.6% → 95.7%"]
+        R2["BM25: 69.6% → +LLM re-rank"]
         R1 --> R2
     end
     
