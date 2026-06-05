@@ -2,8 +2,10 @@
 
 Core router: 4-dimension weighted scoring (semantic × recency × success × cost).
 Advanced router: 3-stage pipeline (Tree Filter → BM25 → LLM Re-rank).
+Active learning: online weight adjustment via bandit + gradient feedback.
+Skill weaving: multi-skill DAG orchestration (chains, parallel, conditional).
 
-Production-proven with 138 real-world skills, 95.7% benchmark accuracy.
+Production-proven with 141 real-world skills, 95.7% benchmark accuracy.
 """
 
 from .router import Skill, RouteResult, SkillRouter
@@ -16,12 +18,19 @@ __all__ = [
     "RouteResult",
     "TreeFilter",
     "BM25Scorer",
+    "FeedbackLearner",
+    "WeavePlanner",
+    "WeaveNode",
+    "WeaveEdge",
+    "WeaveChain",
+    "MergeStrategy",
+    "NodeType",
     "annotate_skill",
     "inject_annotations",
     "load_skill_metadata",
 ]
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 
 def __getattr__(name: str):
@@ -37,4 +46,11 @@ def __getattr__(name: str):
     if name in ("annotate_skill", "inject_annotations", "load_skill_metadata"):
         from . import annotate as _annotate
         return getattr(_annotate, name)
+    if name == "FeedbackLearner":
+        from .learner import FeedbackLearner as _FeedbackLearner
+        return _FeedbackLearner
+    if name in ("WeavePlanner", "WeaveNode", "WeaveEdge", "WeaveChain",
+                "MergeStrategy", "NodeType"):
+        from . import weaver as _weaver
+        return getattr(_weaver, name)
     raise AttributeError(f"module 'skill_weave' has no attribute {name!r}")
