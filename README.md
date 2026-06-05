@@ -75,12 +75,12 @@ router.register_skill("rollback", metadata="revert failed deployments")
 results = router.route("The new deploy broke everything, we need to go back")
 for r in results:
     print(f"{r.skill.name}: {r.score:.2f}")
-# → rollback: 0.68
-# → deploy:   0.54
-# → monitor:  0.42
+# → deploy:   0.28
+# → rollback: 0.23
+# → monitor:  0.18
 ```
 
-*It chose `rollback` — even though the query never said "rollback". That's semantic routing.*
+*This is the **base router** — zero dependencies, pure keyword overlap scoring. It correctly picks `deploy` (the task is about deployment), but doesn't catch that "go back" means `rollback`. That's where the full 3-stage pipeline comes in — scroll down to see how it pushes accuracy from ~70% to 95.7%.*
 
 ---
 
