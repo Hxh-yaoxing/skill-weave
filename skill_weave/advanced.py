@@ -1,6 +1,8 @@
 """Advanced hybrid router — 3-stage pipeline: Tree Filter → BM25 → LLM Re-rank.
 
-Designed for 100+ skill inventories where keyword matching breaks down.
+BM25-only accuracy: 69.6% (16/23 on included benchmark).
+Tree filter reduces 141-skill inventory to ~15 candidates before BM25 scoring.
+LLM re-rank (when available) pushes accuracy higher via semantic understanding.
 """
 
 from __future__ import annotations
