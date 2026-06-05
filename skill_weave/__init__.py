@@ -4,8 +4,6 @@ Core router: 4-dimension weighted scoring (semantic × recency × success × cos
 Advanced router: 3-stage pipeline (Tree Filter → BM25 → LLM Re-rank).
 Active learning: online weight adjustment via bandit + gradient feedback.
 Skill weaving: multi-skill DAG orchestration (chains, parallel, conditional).
-
-Production-proven with 141 real-world skills, 95.7% benchmark accuracy.
 """
 
 from .router import Skill, RouteResult, SkillRouter

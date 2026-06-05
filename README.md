@@ -10,9 +10,9 @@
 
 <br>
 
-> **What makes it special:** A three-stage routing pipeline that shrinks 141 candidate skills to 15 *before* any LLM call. An online learner that gets smarter every time you use it. A weaver that chains skills into DAGs instead of picking just one.
+> **What makes it special:** A three-stage routing pipeline that shrinks 100+ candidate skills to ~15 *before* any LLM call. An online learner that gets smarter every time you use it. A weaver that chains skills into DAGs instead of picking just one.
 >
-> **95.7% accuracy. 81% fewer tokens. 20 tests. Zero required dependencies.**
+> **Zero required dependencies. 20 tests passing. Designed for production-scale skill inventories.**
 
 ---
 
@@ -37,7 +37,7 @@ Multi-agent systems drown in their own skills.
 | Online learning from outcomes | ✅ | ❌ | ❌ | ❌ |
 | Multi-skill DAG weaving | ✅ | ❌ | ❌ | ❌ |
 | Chinese-English synonym match | ✅ | ❌ | ❌ | ❌ |
-| Production-tested (141 skills) | ✅ | — | — | — |
+| Production-scale design (100+ skills) | ✅ | — | — | — |
 | Token cost per route | 0–2K | 0 | ∞ (flat) | ∞ (flat) |
 
 > **Bottom line:** Keyword matching is fast but brittle. LangChain/SK handle semantics but burn tokens on every call. Skill Weave does both — cascade filtering + semantic re-rank — with learning on top.
@@ -187,18 +187,16 @@ skills = load_skill_metadata("/skill/dir")      # scan all skill metadata
 
 ---
 
-## 📊 Real-World Performance
-
-Deployed in production routing **141 skills** across **63 categories**:
-
-```
-           BM25 only           + LLM Re-rank
-Accuracy   ████████░░ 69.6%    ██████████ 95.7%
-Tokens     0                   ~2K per query
-Latency    <50ms               ~1s
-```
+## 📊 Benchmark
 
 23-query benchmark included in the repo (`benchmark/queries.json`).
+
+```bash
+# Run the benchmark
+python -c "from skill_weave import SkillWeave; sw = SkillWeave(); sw.run_benchmark(verbose=True)"
+```
+
+The 3-stage pipeline (Tree Filter → BM25 → LLM Re-rank) is designed to push accuracy well beyond keyword-only matching. Run the benchmark yourself to see results with your skill inventory.
 
 ---
 

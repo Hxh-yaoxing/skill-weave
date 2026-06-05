@@ -1,6 +1,6 @@
 """Advanced hybrid router — 3-stage pipeline: Tree Filter → BM25 → LLM Re-rank.
 
-Production-proven with 138 skills, 95.7% accuracy, 81% context overhead reduction.
+Designed for 100+ skill inventories where keyword matching breaks down.
 """
 
 from __future__ import annotations
