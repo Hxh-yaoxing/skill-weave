@@ -89,24 +89,35 @@ for r in results:
 
 ## 🧠 The Pipeline
 
-```
-Task: "deploy broke, revert now"
-          │
-          ▼
-   ┌──────────────────┐
-   │  L1  Tree Filter  │   "deploy" → infrastructure → matches 37 skills
-   │  (zero token)     │   "revert" → narrows to 4 candidates
-   └────────┬─────────┘
-            ▼
-   ┌──────────────────┐
-   │  L2  BM25 Rank    │   Statistical scoring over 4 candidates
-   │  (<50ms)          │   rollback: 0.68   deploy: 0.54
-   └────────┬─────────┘
-            ▼
-   ┌──────────────────┐
-   │  L3  LLM Re-rank  │   Semantic understanding over top ~10
-   │  (optional, ~1s)  │   Boosts accuracy: 69.6% → 95.7%
-   └──────────────────┘
+```mermaid
+flowchart TD
+    TASK["💬 Task: 'deploy broke, revert now'"]
+    
+    TASK --> L1
+    
+    subgraph L1["L1: Tree Filter (zero token)"]
+        T1["'deploy' → infrastructure → 37 matches"]
+        T2["'revert' → narrows to 4 candidates"]
+        T1 --> T2
+    end
+    
+    L1 --> L2
+    
+    subgraph L2["L2: BM25 Rank (<50ms)"]
+        B1["Statistical scoring over 4 candidates"]
+        B2["rollback: 0.68 | deploy: 0.54"]
+        B1 --> B2
+    end
+    
+    L2 --> L3
+    
+    subgraph L3["L3: LLM Re-rank (optional, ~1s)"]
+        R1["Semantic understanding over top ~10"]
+        R2["Accuracy: 69.6% → 95.7%"]
+        R1 --> R2
+    end
+    
+    L3 --> OUTPUT["✅ rollback (score: 0.92)"]
 ```
 
 | Stage | What It Does | Token Cost | Latency |
