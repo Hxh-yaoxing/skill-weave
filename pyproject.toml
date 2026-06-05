@@ -1,13 +1,13 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "skill-weave"
-version = "0.2.0"
+version = "0.3.0"
 description = "Adaptive skill routing for multi-agent systems"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 requires-python = ">=3.10"
 authors = [
     {name = "FeiMing Studio"},
@@ -16,6 +16,9 @@ authors = [
 [project.urls]
 Homepage = "https://github.com/Hxh-yaoxing/skill-weave"
 Repository = "https://github.com/Hxh-yaoxing/skill-weave"
+
+[tool.setuptools.packages.find]
+include = ["skill_weave*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
