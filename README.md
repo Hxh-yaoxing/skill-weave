@@ -5,6 +5,7 @@
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://pypi.org/project/skill-weave)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-20%2F20-brightgreen)](tests/)
+[![Release](https://img.shields.io/github/v/release/Hxh-yaoxing/skill-weave)](https://github.com/Hxh-yaoxing/skill-weave/releases)
 [![Colab](https://img.shields.io/badge/▶%20Try%20Now-Colab-orange)](https://colab.research.google.com/github/Hxh-yaoxing/skill-weave/blob/main/notebooks/skill_weave_demo.ipynb)
 
 <br>
@@ -27,6 +28,22 @@ Multi-agent systems drown in their own skills.
 
 ---
 
+## 🆚 How It Compares
+
+| Feature | Skill Weave | Keyword Match | LangChain Router | Semantic Kernel |
+|---------|-------------|---------------|------------------|-----------------|
+| Zero-dependency core | ✅ | ✅ | ❌ | ❌ |
+| 3-stage cascade pipeline | ✅ | ❌ | ❌ | ❌ |
+| Online learning from outcomes | ✅ | ❌ | ❌ | ❌ |
+| Multi-skill DAG weaving | ✅ | ❌ | ❌ | ❌ |
+| Chinese-English synonym match | ✅ | ❌ | ❌ | ❌ |
+| Production-tested (141 skills) | ✅ | — | — | — |
+| Token cost per route | 0–2K | 0 | ∞ (flat) | ∞ (flat) |
+
+> **Bottom line:** Keyword matching is fast but brittle. LangChain/SK handle semantics but burn tokens on every call. Skill Weave does both — cascade filtering + semantic re-rank — with learning on top.
+
+---
+
 ## 🎮 Try It Now
 
 No install. No API key. 10 seconds.
@@ -40,8 +57,10 @@ Four interactive demos: basic routing → active learning → skill weaving → 
 ## 📦 Install
 
 ```bash
-pip install skill-weave          # zero-dependency core
-pip install skill-weave[full]    # + PyYAML for annotation engine
+# From GitHub (recommended until PyPI listing is complete)
+pip install git+https://github.com/Hxh-yaoxing/skill-weave.git
+
+# Coming soon: pip install skill-weave
 ```
 
 ---
@@ -214,6 +233,20 @@ pip install -e ".[dev]"
 python tests/test_router.py   # 9 tests
 python tests/test_learner.py  # 11 tests
 ```
+
+---
+
+## 📊 Status & Roadmap
+
+Active development. Core pipeline stable. Used daily in production.
+
+| Version | Date | Highlights |
+|---------|------|------------|
+| **0.3.0** | 2026-06-05 | Active learning (UCB), skill weaving (DAG), 20 tests |
+| **0.2.0** | 2026-06-05 | 3-stage pipeline, BM25, TreeFilter, annotation, benchmark |
+| **0.1.0** | 2026-06-05 | Core `SkillRouter` with 4-dim weighted scoring |
+
+**Up next:** v0.4 — async routing + embedding backends. [Full changelog →](CHANGELOG.md)
 
 ---
 
