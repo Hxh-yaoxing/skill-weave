@@ -76,8 +76,8 @@ results = router.route("The new deploy broke everything, we need to go back")
 for r in results:
     print(f"{r.skill.name}: {r.score:.2f}")
 # → deploy:   0.28
-# → rollback: 0.23
 # → monitor:  0.18
+# → rollback: 0.18
 ```
 
 *This is the **base router** — zero dependencies, pure keyword overlap scoring. It correctly picks `deploy` (the task is about deployment), but doesn't catch that "go back" means `rollback`. That's where the full 3-stage pipeline comes in — BM25 alone pushes accuracy to 69.6% (16/23), and LLM re-rank further improves it.*
@@ -148,7 +148,7 @@ router.skills  → dict[str, Skill]
 ```python
 sw = SkillWeave(skill_dir="/path/to/skills", llm_rank_fn=my_llm_fn)
 sw.route(query, top_k=5, exclude_tier3=True)  → list[dict]
-sw.run_benchmark(queries, verbose=True)        → {"accuracy": 0.957, ...}
+sw.run_benchmark(queries, verbose=True)        → {"accuracy": 0.696, ...}
 sw.stats                                       → {"total_skills": 141, ...}
 ```
 
