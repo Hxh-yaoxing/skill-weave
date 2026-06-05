@@ -4,9 +4,9 @@
 
 [![PyPI](https://img.shields.io/badge/python-3.10+-blue)](https://pypi.org/project/skill-weave)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-9%20passed-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-20%20passed-brightgreen)](tests/)
 
-Skill Weave dynamically matches incoming tasks to the most appropriate skill or tool using a **3-stage routing pipeline**. It doesn't hard-code mappings — it learns which skills weave together for optimal task completion.
+Skill Weave dynamically matches incoming tasks to the most appropriate skill or tool using a **3-stage routing pipeline**. It doesn't hard-code mappings — it **learns** which skills work best and **weaves** multiple skills into execution chains.
 
 > **Production-proven**: Currently routing **141 skills** in a live multi-agent system with **95.7%** benchmark accuracy and **81%** context overhead reduction.
 
@@ -148,11 +148,12 @@ with open("benchmark/queries.json") as f:
 ## Features
 
 - **3-stage pipeline** — coarse → statistical → semantic, each stage filtering the next
+- **Active learning** — records routing outcomes, adjusts weights via UCB bandit + gradient feedback
+- **Skill weaving** — DAG-based multi-skill chains: sequential, parallel, conditional branching
 - **81% context reduction** — Tree filter cuts 141 skills to ~15 before any LLM call
 - **Tier system** — T1 (core/always), T2 (on-demand), T3 (cold-storage/skip)
 - **Synonym expansion** — Chinese-English cross-lingual matching built in
 - **Dynamic registration** — add/remove skills at runtime, no restart needed
-- **Historical learning** — `SkillRouter` tracks success rates over time
 - **Zero-dependency core** — `SkillRouter` is pure Python, no installs needed
 
 ---
@@ -178,13 +179,16 @@ skill_weave/
 ├── __init__.py      # Package entry, lazy imports
 ├── router.py        # SkillRouter: 4-dim weighted scoring
 ├── advanced.py      # SkillWeave: 3-stage pipeline + BM25 + TreeFilter
-└── annotate.py      # Skill annotation engine + metadata loader
+├── annotate.py      # Skill annotation engine + metadata loader
+├── learner.py       # FeedbackLearner: UCB bandit + online weight adjustment
+└── weaver.py        # WeavePlanner: multi-skill DAG orchestration
 
 benchmark/
 └── queries.json     # 23 real-world routing queries
 
 tests/
-└── test_router.py   # 9 unit tests, all passing
+├── test_router.py   # 9 core routing tests
+└── test_learner.py  # 11 active learning + weaving tests
 ```
 
 ---
@@ -208,7 +212,21 @@ This isn't a toy. Skill Weave routes **141 skills** across **63 categories** in 
 
 ## Status
 
-Active development. Core pipeline stable, embedding integration in progress. Used daily in production.
+Active development. Core pipeline stable. Used daily in production.
+
+### Changelog
+
+| Version | Date | Highlights |
+|---------|------|------------|
+| **0.3.0** | 2026-06-05 | Active learning (UCB + gradient), skill weaving (DAG chains) |
+| **0.2.0** | 2026-06-05 | 3-stage pipeline, BM25, TreeFilter, annotation engine, benchmark |
+| **0.1.0** | 2026-06-05 | Core `SkillRouter` with 4-dim weighted scoring, 9 tests |
+
+## Authors
+
+- **Engine & Architecture** — Hermes 深蓝 ([@Hxh-yaoxing](https://github.com/Hxh-yaoxing))
+- **Creative Direction & Co-creation** — 曜行 (He Xuheng)
+- **Initial Scaffold** — Hermes 楚乔
 
 ## License
 
