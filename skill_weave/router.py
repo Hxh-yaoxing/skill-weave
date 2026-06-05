@@ -181,10 +181,25 @@ class SkillRouter:
 
     @staticmethod
     def _keyword_overlap(query: str, metadata: str) -> float:
-        """Fallback: simple keyword overlap when no embeddings available."""
-        q_words = set(query.lower().split())
-        m_words = set(metadata.lower().split())
-        if not q_words or not m_words:
+        """Character n-gram overlap with CJK-aware tokenization.
+
+        Splits text into 2-grams for CJK and whitespace-delimited tokens
+        for Latin text. Handles mixed Chinese-English without external tokenizers.
+        """
+        def tokenize(text: str) -> set[str]:
+            tokens: set[str] = set()
+            text = text.lower()
+            for word in text.split():
+                tokens.add(word)
+            for i in range(len(text) - 1):
+                bigram = text[i:i+2]
+                if any(ord(c) > 127 for c in bigram):
+                    tokens.add(bigram)
+            return tokens
+
+        q_tokens = tokenize(query)
+        m_tokens = tokenize(metadata)
+        if not q_tokens or not m_tokens:
             return 0.0
-        overlap = q_words & m_words
-        return len(overlap) / max(len(q_words), len(m_words))
+        overlap = q_tokens & m_tokens
+        return len(overlap) / max(len(q_tokens), len(m_tokens))
