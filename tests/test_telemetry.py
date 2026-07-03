@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 import tempfile
 import pytest
 
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from skill_weave.telemetry import Telemetry, RouteSpan
 
