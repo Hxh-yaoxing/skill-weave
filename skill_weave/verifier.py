@@ -15,7 +15,12 @@ import time
 from dataclasses import dataclass, field
 from typing import Optional
 
-import requests
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    HAS_REQUESTS = False
+    requests = None
 
 
 def _load_novita_key() -> str:
