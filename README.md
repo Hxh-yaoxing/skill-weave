@@ -4,15 +4,16 @@
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://pypi.org/project/skill-weave)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-20%2F20-brightgreen)](tests/)
+[![Tests](https://img.shields.io/badge/tests-111%2F111-brightgreen)](tests/)
 [![Release](https://img.shields.io/github/v/release/Hxh-yaoxing/skill-weave)](https://github.com/Hxh-yaoxing/skill-weave/releases)
+[![SkillHub](https://img.shields.io/badge/SkillHub-v1.8.0-blue)](https://skillhub.cn/skills/skill-weave)
 [![Colab](https://img.shields.io/badge/▶%20Try%20Now-Colab-orange)](https://colab.research.google.com/github/Hxh-yaoxing/skill-weave/blob/main/notebooks/skill_weave_demo.ipynb)
 
 <br>
 
-> **What makes it special:** A three-stage routing pipeline that shrinks 100+ candidate skills to ~15 *before* any LLM call. An online learner that gets smarter every time you use it. A weaver that chains skills into DAGs instead of picking just one.
+> **What makes it special:** A three-stage routing pipeline (12 chains, 72 skills) that shrinks 100+ candidate skills to ~15 *before* any LLM call. An online learner that gets smarter every time you use it. A weaver that chains skills into DAGs with automatic parallelism detection and verification gates.
 >
-> **Zero required dependencies. 20 tests passing. Designed for production-scale skill inventories.**
+> **Zero required dependencies. 111 tests passing (includes v0.4 modules). Designed for production-scale skill inventories.**
 
 ---
 
