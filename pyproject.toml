@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skill-weave"
-version = "0.3.0"
+version = "0.4.0"
 description = "Adaptive skill routing for multi-agent systems"
 readme = "README.md"
 license = "MIT"
@@ -17,6 +17,10 @@ authors = [
 Homepage = "https://github.com/Hxh-yaoxing/skill-weave"
 Repository = "https://github.com/Hxh-yaoxing/skill-weave"
 
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+test = ["pytest>=7.0"]
 [tool.setuptools.packages.find]
 include = ["skill_weave*"]
 
