@@ -3,8 +3,8 @@ name: skill-weave
 slug: skill-weave
 displayName: Skill Weave 技能牌组编织器
 emoji: 🃏
-description: "Skill Weave 技能路由与自进化平台 — 12链72牌，链识别100%准确率，验证协议门+并行度检测。v1.8.0，111测试，PyPI可用，零新依赖。"
-version: 1.8.0
+description: "Skill Weave 技能路由与自进化平台 — 12链72牌，链识别100%准确率，验证协议门+并行度检测。v1.8.1，111测试，PyPI可用，零新依赖。"
+version: 1.8.1
 category: ai-agent
 labels: [agent, routing, orchestration, skill-management, multi-agent, self-evolving]
 dependencies: [skill-weave (PyPI)]
@@ -19,7 +19,7 @@ tree: workflow > skill-weave
 tier: 1
 updated: 2026-07-03
 changelog: |
-  v1.8.0: R12 质量层 — 验证协议门 + 资产传递规范 + 并行度检测 + 失败归因四分类 (2026-07-03 深蓝，借鉴万有DAG观察)。新增 verify_chain_output(CHAIN_OUTPUT_SCHEMAS) / detect_parallelism / feedback status 四态。3个新函数 0 新依赖。基准回归 22/23=95.65%，无回归。
+  v1.8.1: R12 质量层 — 验证协议门 + 资产传递规范 + 并行度检测 + 失败归因四分类 (2026-07-03 深蓝，借鉴万有DAG观察)。新增 verify_chain_output(CHAIN_OUTPUT_SCHEMAS) / detect_parallelism / feedback status 四态。3个新函数 0 新依赖。基准回归 22/23=95.65%，无回归。
   v1.5.0: 仪式交接协议落地 — task_graph.py(DAG真相源)+work_card_worker.py(执行引擎)+auto_archive.py(自动归档+清理)。45测试全过。任务图支持跨项目依赖。Worker cron驱动各profile轮流执行。归档自动打包→思源索引→清理临时文件。接口统一(owner字段)。完整设计见 references/ritual-handoff-protocol.md。
   v1.4.1: 卡片制+跨Profile共享入库。新增 card.py(27测试) + 共享目录 /opt/data/shared/cards/ + inject_card_context.py。LoopCard 替代全量上下文（认知负荷-98%）。子Agent spawn 自动注入最近3张卡片摘要。架构自进化草案 references/architecture-self-evolution-v05.md。
   v1.4.0: skill-weave v0.4.0 核心落地 — 6项P0编码完成，84个测试。新增 circuit_breaker.py（熔断器+Darwin棘轮/SkillOpt Rejected Buffer）+ telemetry.py（JSONL结构化日志+span追踪+自动轮转）+ embedding.py（LRU嵌入缓存+双模后端Ollama/Dify+自动故障转移）+ spine.py（循环状态脊柱，权重连续性444×提升）+ verifier.py（Maker-Checker验证层，虚假成功3/3识破）。改造 learner.py（滑动窗口失效检测+冷启动预热）+ router.py（嵌入缓存集成）。零新依赖，全向后兼容。基准无回归（17/23）。架构摘要见 references/v0.4-architecture.md。新增拆·织·验执行流 + Loop Engineering调研参考。
