@@ -7,6 +7,8 @@ import time
 from dataclasses import dataclass, field
 from typing import Callable, Optional
 
+from .embedding import EmbeddingCache
+
 
 @dataclass
 class Skill:
@@ -63,6 +65,7 @@ class SkillRouter:
         delta: float = 0.10,   # cost weight
         decay_half_life: float = 3600.0,  # seconds (1 hour)
         embed_fn: Optional[Callable[[str], list[float]]] = None,
+        cache_size: int = 500,
     ):
         self.alpha = alpha
         self.beta = beta
@@ -72,6 +75,7 @@ class SkillRouter:
         self.embed_fn = embed_fn
         self._skills: dict[str, Skill] = {}
         self._embeddings: dict[str, list[float]] = {}
+        self._cache = EmbeddingCache(max_size=cache_size) if embed_fn else None
 
     def register_skill(
         self,
@@ -84,7 +88,14 @@ class SkillRouter:
         self._skills[name] = skill
         # pre-compute embedding if provider available
         if self.embed_fn and metadata:
-            self._embeddings[name] = self.embed_fn(metadata)
+            cached = self._cache.get(metadata) if self._cache else None
+            if cached is not None:
+                self._embeddings[name] = cached
+            else:
+                emb = self.embed_fn(metadata)
+                self._embeddings[name] = emb
+                if self._cache:
+                    self._cache.put(metadata, emb)
         return skill
 
     def unregister_skill(self, name: str) -> bool:
@@ -118,7 +129,15 @@ class SkillRouter:
             return []
 
         # compute task embedding if available
-        task_emb = self.embed_fn(task) if self.embed_fn else None
+        task_emb = None
+        if self.embed_fn:
+            cached = self._cache.get(task) if self._cache else None
+            if cached is not None:
+                task_emb = cached
+            else:
+                task_emb = self.embed_fn(task)
+                if self._cache:
+                    self._cache.put(task, task_emb)
 
         results: list[RouteResult] = []
         now = time.time()
@@ -181,25 +200,10 @@ class SkillRouter:
 
     @staticmethod
     def _keyword_overlap(query: str, metadata: str) -> float:
-        """Character n-gram overlap with CJK-aware tokenization.
-
-        Splits text into 2-grams for CJK and whitespace-delimited tokens
-        for Latin text. Handles mixed Chinese-English without external tokenizers.
-        """
-        def tokenize(text: str) -> set[str]:
-            tokens: set[str] = set()
-            text = text.lower()
-            for word in text.split():
-                tokens.add(word)
-            for i in range(len(text) - 1):
-                bigram = text[i:i+2]
-                if any(ord(c) > 127 for c in bigram):
-                    tokens.add(bigram)
-            return tokens
-
-        q_tokens = tokenize(query)
-        m_tokens = tokenize(metadata)
-        if not q_tokens or not m_tokens:
+        """Fallback: simple keyword overlap when no embeddings available."""
+        q_words = set(query.lower().split())
+        m_words = set(metadata.lower().split())
+        if not q_words or not m_words:
             return 0.0
-        overlap = q_tokens & m_tokens
-        return len(overlap) / max(len(q_tokens), len(m_tokens))
+        overlap = q_words & m_words
+        return len(overlap) / max(len(q_words), len(m_words))
