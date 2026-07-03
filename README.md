@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-111%2F111-brightgreen)](tests/)
 [![Release](https://img.shields.io/github/v/release/Hxh-yaoxing/skill-weave)](https://github.com/Hxh-yaoxing/skill-weave/releases)
-[![SkillHub](https://img.shields.io/badge/SkillHub-v1.8.0-blue)](https://skillhub.cn/skills/skill-weave)
+[![SkillHub](https://img.shields.io/badge/SkillHub-v1.8.1-blue)](https://skillhub.cn/skills/skill-weave)
 [![Colab](https://img.shields.io/badge/▶%20Try%20Now-Colab-orange)](https://colab.research.google.com/github/Hxh-yaoxing/skill-weave/blob/main/notebooks/skill_weave_demo.ipynb)
 
 <br>
